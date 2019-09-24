@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace属性值通常设置为：包名 + SQL映射文件名来指定唯一的命名空间 -->
+<mapper namespace="dao.UserDao">
+
+    <!-- 查询用户信息, id对应dao层的接口方法名 -->
+    <select id="selectUserByUserName" resultType="pojo.User" parameterType="String">
+        select * from user where 1 = 1
+
+        <if test="userAccount != null and userAccount != ''">
+            and userAccount like concat('%', #{ userAccount }, '%')
+        </if>
+
+    </select>
+
+
+    <!-- 选出所有用户的信息 -->
+    <select id="selectAllUser" resultType="pojo.User">
+		select * from user
+	</select>
+
+
+    <insert id="addUser" parameterType="pojo.User"
+            keyProperty="userId" useGeneratedKeys="true">
+        insert into user (userAccount, password) values (#{userAccount}, #{password})
+    </insert>
+
+
+    <update id="modifyPassword" parameterType="pojo.User">
+        update user set password = #{password} where userAccount = #{userAccount}
+    </update>
+
+
+    <delete id="deleteUser" parameterType="String">
+        delete from user where userAccount = #{userAccount}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace属性值通常设置为：包名 + SQL映射文件名来指定唯一的命名空间 -->
+<mapper namespace="dao.EquipmentDao">
+
+    <select id="selectEquipmentByLabId" resultType="String" parameterType="Integer">
+        select equipmentName from equipment where lId = #{lId}
+    </select>
+
+</mapper>
